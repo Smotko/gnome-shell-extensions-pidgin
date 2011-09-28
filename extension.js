@@ -308,17 +308,17 @@ Source.prototype = {
     },
 
     _onDisplayedChatMessage: function(emitter, account, author, text, conversation, flag) {
-    	global.log(flag);
+    	
         if (text && (this._conversation == conversation) && (flag & 3) == 2) {
             // accept messages from people who sent us something with our nick in it
             if ((flag & 32) == 32) {
                 this._authors[author] = true;
             }
-            if (author in this._authors) {
+            //if (author in this._authors) {
                 let message = wrappedText(text, author, null, TelepathyClient.NotificationDirection.RECEIVED, this._chat);
                 this._notification.appendMessage(message, false);
                 this.notify();
-            }
+            //}
         }
         else if(flag == 1){
             let message = wrappedText(text, author, null, TelepathyClient.NotificationDirection.SENT, this._chat);
@@ -416,7 +416,7 @@ PidginClient.prototype = {
     _chatMessageDisplayed: function(emitter, account, author, message, conversation, flag) {
 
         // only trigger on chat message received with nick
-        if (flag != (2 | 32)) return;
+        //if (flag != (2 | 32)) return;
 
         if (conversation) {
             let source = this._sources[conversation];
